@@ -190,7 +190,7 @@ export const AdminLogin: React.FC<{
                   setPassword(e.target.value);
                   if (accessDenied) setAccessDenied(false);
                 }}
-                placeholder="Enter passcode (e.g. zoha2026)..."
+                placeholder="Enter passcode"
                 className={`w-full pl-10 pr-10 py-3.5 rounded-xl bg-black/60 text-white placeholder-slate-500 text-sm font-mono focus:outline-none transition-all ${
                   accessDenied
                     ? 'border-2 border-rose-500 focus:border-rose-400 ring-2 ring-rose-500/20'
