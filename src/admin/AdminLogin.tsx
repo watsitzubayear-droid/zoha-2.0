@@ -8,7 +8,6 @@ import {
   ShieldCheck,
   ShieldAlert,
   ArrowRight,
-  Sparkles,
   AlertTriangle,
   KeyRound,
 } from 'lucide-react';
@@ -32,27 +31,21 @@ export const AdminLogin: React.FC<{
     setIsSubmitting(true);
     setAccessDenied(false);
 
-    // Call loginAdmin verification
     const success = await loginAdmin(password.trim());
     setIsSubmitting(false);
 
     if (success) {
       setAccessGranted(true);
       setAccessDenied(false);
-      showToast('Access Granted. Welcome back to the Creative Control Center, ZOHA.');
+      showToast('Access Granted. Welcome back to the Creative Control Center.');
       if (onLoginSuccess) {
         onLoginSuccess();
       }
     } else {
       setAccessDenied(true);
       setAttemptCount((prev) => prev + 1);
-      showToast('ACCESS DENIED: Invalid administrative passcode.', 'error');
+      showToast('ACCESS DENIED: Invalid credentials.', 'error');
     }
-  };
-
-  const handleQuickDemoAccess = () => {
-    setPassword('zoharo2002');
-    setAccessDenied(false);
   };
 
   return (
@@ -118,13 +111,13 @@ export const AdminLogin: React.FC<{
               ? 'AUTHENTICATION FAILED'
               : accessGranted
               ? 'ACCESS GRANTED'
-              : 'RESTRICTED ARTIST ACCESS'}
+              : 'RESTRICTED ACCESS'}
           </span>
           <h2 className="text-2xl sm:text-3xl font-black font-cinzel text-white mt-1">
-            CREATIVE CONTROL CENTER
+            ADMIN CONTROL CENTER
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Enter administrative master passcode to manage music, releases, and site configuration.
+            Enter administrator credentials to access the control panel.
           </p>
         </div>
 
@@ -145,20 +138,13 @@ export const AdminLogin: React.FC<{
                   ACCESS DENIED
                 </h4>
                 <p className="text-xs text-rose-300/90 leading-relaxed">
-                  Invalid passcode entered. Access to the creative control center is strictly restricted to authorized artist credentials.
+                  Invalid credentials. Access to the admin control center is restricted.
                 </p>
-                <div className="pt-1 flex items-center gap-2">
-                  <span className="text-[10px] font-mono text-rose-400/80">
-                    Required Pass: <strong className="text-rose-200 font-bold">zoha###</strong>
-                  </span>
-                  <button
-                    type="button"
-                    onClick={handleQuickDemoAccess}
-                    className="text-[10px] text-amber-300 hover:text-amber-200 underline font-mono cursor-pointer"
-                  >
-                    Auto-Fill
-                  </button>
-                </div>
+                {attemptCount > 0 && (
+                  <p className="text-[10px] font-mono text-rose-400/80">
+                    Attempt #{attemptCount} failed
+                  </p>
+                )}
               </div>
             </motion.div>
           )}
@@ -167,12 +153,9 @@ export const AdminLogin: React.FC<{
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                Administrative Passcode
-              </label>
-              <span className="text-[10px] text-slate-500 font-mono">Master Key: zoha###</span>
-            </div>
+            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+              Administrator Password
+            </label>
 
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -190,7 +173,7 @@ export const AdminLogin: React.FC<{
                   setPassword(e.target.value);
                   if (accessDenied) setAccessDenied(false);
                 }}
-                placeholder="Enter passcode"
+                placeholder="Enter your password..."
                 className={`w-full pl-10 pr-10 py-3.5 rounded-xl bg-black/60 text-white placeholder-slate-500 text-sm font-mono focus:outline-none transition-all ${
                   accessDenied
                     ? 'border-2 border-rose-500 focus:border-rose-400 ring-2 ring-rose-500/20'
@@ -205,19 +188,6 @@ export const AdminLogin: React.FC<{
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
-
-            {attemptCount > 0 && accessDenied && (
-              <p className="text-[11px] font-mono text-rose-400 mt-1.5 flex items-center gap-1">
-                <span>Attempt #{attemptCount} failed. Default master passcode is</span>
-                <button
-                  type="button"
-                  onClick={handleQuickDemoAccess}
-                  className="font-bold text-amber-300 underline cursor-pointer"
-                >
-                  zoha2026
-                </button>
-              </p>
-            )}
           </div>
 
           <button
@@ -233,32 +203,23 @@ export const AdminLogin: React.FC<{
           >
             <span>
               {isSubmitting
-                ? 'VERIFYING PASSCODE...'
+                ? 'VERIFYING...'
                 : accessGranted
                 ? 'ACCESS GRANTED'
                 : accessDenied
-                ? 'RETRY AUTHENTICATION'
-                : 'ENTER CONTROL CENTER'}
+                ? 'RETRY'
+                : 'ACCESS CONTROL PANEL'}
             </span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        {/* Quick helper / Return button */}
-        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
-          <button
-            type="button"
-            onClick={handleQuickDemoAccess}
-            className="hover:text-amber-300 flex items-center gap-1.5 cursor-pointer font-mono transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>Use Default Passcode (zoha###)</span>
-          </button>
-
+        {/* Return button */}
+        <div className="mt-8 pt-6 border-t border-white/10 flex justify-center">
           <button
             type="button"
             onClick={onBackToSite}
-            className="hover:text-white underline cursor-pointer transition-colors"
+            className="text-xs text-slate-400 hover:text-white underline cursor-pointer transition-colors"
           >
             Return to Public Site
           </button>
