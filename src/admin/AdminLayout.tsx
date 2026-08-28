@@ -4,7 +4,7 @@ import { AdminDashboard } from './AdminDashboard';
 import { AdminHeroEditor } from './AdminHeroEditor';
 import { AdminAboutEditor } from './AdminAboutEditor';
 import { AdminMusicManager } from './AdminMusicManager';
-import { AdminVideoManager } './AdminVideoManager';
+import { AdminVideoManager } from './AdminVideoManager';
 import { AdminGalleryManager } from './AdminGalleryManager';
 import { AdminStoriesManager } from './AdminStoriesManager';
 import { AdminJourneyManager } from './AdminJourneyManager';
@@ -15,7 +15,7 @@ import { AdminMessagesManager } from './AdminMessagesManager';
 import { AdminAnalyticsView } from './AdminAnalyticsView';
 import { AdminSettingsEditor } from './AdminSettingsEditor';
 import { AdminSocialManager } from './AdminSocialManager';
-import { AdminBackupRestore } from './AdminBackupRestore'; // ✅ ADD THIS IMPORT
+import { AdminBackupRestore } from './AdminBackupRestore';
 import {
   LayoutDashboard,
   Sparkles,
@@ -32,7 +32,7 @@ import {
   TrendingUp,
   Settings,
   Share2,
-  Cloud, // ✅ ADD THIS IMPORT
+  Cloud,
   LogOut,
   ExternalLink,
   Menu,
@@ -80,7 +80,6 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToSite }) => {
     },
     { id: 'analytics', label: 'Audience Insights', icon: TrendingUp, section: 'SYSTEM' },
     { id: 'settings', label: 'Settings & Themes', icon: Settings, section: 'SYSTEM' },
-    // ✅ ADD THIS NEW NAV ITEM
     { id: 'backup', label: 'Backup & Restore', icon: Cloud, section: 'SYSTEM' },
   ];
 
@@ -122,7 +121,6 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToSite }) => {
         return <AdminAnalyticsView />;
       case 'settings':
         return <AdminSettingsEditor />;
-      // ✅ ADD THIS NEW CASE
       case 'backup':
         return <AdminBackupRestore />;
       default:
