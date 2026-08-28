@@ -51,7 +51,7 @@ export const AdminLogin: React.FC<{
   };
 
   const handleQuickDemoAccess = () => {
-    setPassword('zoha2026');
+    setPassword('zoharo2002');
     setAccessDenied(false);
   };
 
@@ -149,7 +149,7 @@ export const AdminLogin: React.FC<{
                 </p>
                 <div className="pt-1 flex items-center gap-2">
                   <span className="text-[10px] font-mono text-rose-400/80">
-                    Required Pass: <strong className="text-rose-200 font-bold">zoha2026</strong>
+                    Required Pass: <strong className="text-rose-200 font-bold">zoha###</strong>
                   </span>
                   <button
                     type="button"
@@ -171,7 +171,7 @@ export const AdminLogin: React.FC<{
               <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
                 Administrative Passcode
               </label>
-              <span className="text-[10px] text-slate-500 font-mono">Master Key: zoha2026</span>
+              <span className="text-[10px] text-slate-500 font-mono">Master Key: zoha###</span>
             </div>
 
             <div className="relative">
@@ -252,7 +252,7 @@ export const AdminLogin: React.FC<{
             className="hover:text-amber-300 flex items-center gap-1.5 cursor-pointer font-mono transition-colors"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>Use Default Passcode (zoha2026)</span>
+            <span>Use Default Passcode (zoha###)</span>
           </button>
 
           <button
