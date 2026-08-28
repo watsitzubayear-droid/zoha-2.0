@@ -1,0 +1,6 @@
+{
+  "name": "ZOHA 2.0",
+  "description": "Official artist, music, and cinematic creative platform for ZOHA featuring music player, YouTube hub, visual gallery, interactive universe, and creative control center.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
