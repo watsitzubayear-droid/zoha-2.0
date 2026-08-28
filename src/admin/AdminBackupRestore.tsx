@@ -1,4 +1,3 @@
-// src/admin/AdminBackupRestore.tsx
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { Download, Upload, Cloud, CheckCircle, AlertCircle, Shield, Sparkles } from 'lucide-react';
@@ -17,13 +16,11 @@ export const AdminBackupRestore: React.FC = () => {
     }
 
     try {
-      // Create a clean backup without sensitive info
       const backupData = {
         ...data,
-        // Remove sensitive info if needed
         settings: {
           ...data.settings,
-          adminPasscode: undefined, // Don't backup passcode
+          adminPasscode: undefined,
         }
       };
 
@@ -45,12 +42,10 @@ export const AdminBackupRestore: React.FC = () => {
     }
   };
 
-  // Handle file upload
   const handleFileUpload = (file: File) => {
     setSelectedFile(file);
   };
 
-  // Restore from backup
   const handleRestoreBackup = async () => {
     if (!selectedFile) {
       showToast('Please select a backup file first', 'error');
@@ -63,12 +58,10 @@ export const AdminBackupRestore: React.FC = () => {
       const text = await selectedFile.text();
       const backupData = JSON.parse(text);
 
-      // Validate backup structure
       if (!backupData.songs || !backupData.videos || !backupData.gallery) {
         throw new Error('Invalid backup file format');
       }
 
-      // Send to server
       const response = await fetch('/api/admin/import', {
         method: 'POST',
         headers: {
@@ -81,7 +74,6 @@ export const AdminBackupRestore: React.FC = () => {
         await refreshData();
         showToast('Backup restored successfully! 🎉');
         setSelectedFile(null);
-        // Reset file input
         const fileInput = document.getElementById('backup-file-input') as HTMLInputElement;
         if (fileInput) fileInput.value = '';
       } else {
@@ -94,7 +86,6 @@ export const AdminBackupRestore: React.FC = () => {
     }
   };
 
-  // Drag and drop handlers
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setDragOver(true);
@@ -120,7 +111,6 @@ export const AdminBackupRestore: React.FC = () => {
     }
   };
 
-  // File input change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -128,7 +118,6 @@ export const AdminBackupRestore: React.FC = () => {
     }
   };
 
-  // Count total items
   const totalItems = data ? {
     songs: data.songs.length,
     videos: data.videos.length,
